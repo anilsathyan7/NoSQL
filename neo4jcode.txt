@@ -1,4 +1,8 @@
-To just show the graph type the follwoing code and execute ot in browser/console:-
+
+Graph Databases: Neo4j:-
+------------------------
+
+To view the graph type the follwoing code and execute ot in browser/console:-
 
 CREATE (p:Person{ name:"priya",title:"Assistant Professor"}),
        (g:Person{name:"guru",title:"Associate Professor"}),
@@ -37,6 +41,8 @@ RETURN *;
 
 The expected output is shown in the picture i.e screenshot(neo_graph.png)
 
+Sample codes:-
+---------------
 
 1.What is the relationship between priya and guru?
 
@@ -353,3 +359,5 @@ CREATE (tn) -[:PART_OF]-> (in)
 CREATE (kl) -[:PART_OF]-> (in)
 
 RETURN x LIMIT 1;
+
+NB: The codes are not likely to be optimized.Although, i hope they are correct to best of my knowledge.Well it seems to be working!!!.Please do point out any errors to be corrected or optimization to be carried out..if there is scope for any!!!
