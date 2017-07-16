@@ -1,0 +1,355 @@
+To just show the graph type the follwoing code and execute ot in browser/console:-
+
+CREATE (p:Person{ name:"priya",title:"Assistant Professor"}),
+       (g:Person{name:"guru",title:"Associate Professor"}),
+
+	   (ws:Subject{name:"Web Service"}),
+       	   (cc:Subject{name:"Cloud Computing"}),
+
+	   (tn:State{ name:"Tamil Nadu",Capital:"Chennai"}),
+           (kl:State{name:"Kerala",Capital:"Thiruvanathapuram"}),
+
+	   (saas:Service{ name:"SaaS"}),
+           (iaas:Service{ name:"IaaS"}),
+           (paas:Service{ name:"PaaS"}),
+       
+	   (vit:Institiute{ name:"VIT"}),
+           (vlr:Place{ name:"Vellore"}),
+           (in:Country{ name:"India"}),
+
+
+ (p) -[:MARRIED]-> (g),
+ (g) -[:MARRIED]-> (p),
+ (p) -[:WORKS_IN]-> (vit),
+ (g) -[:WORKS_IN]-> (vit),
+ (p) -[ra:TEACHES {since:"12/12/2014",class:"B.tech"}]-> (cc),
+ (g) -[pa:TEACHES {since:"22/3/2016",class:"M.Tech"}]-> (cc),
+ (g) -[sa:TEACHES {since:"7/7/2015",class:"M.Tech"}]-> (ws),
+ (saas) -[:BELONGS_TO]-> (cc),
+ (paas) -[:BELONGS_TO]-> (cc),
+ (iaas) -[:BELONGS_TO]-> (cc),
+ (vit) -[:LOCATED_IN]-> (vlr),
+ (vlr) -[:DISTRICT_OF]-> (tn),
+ (tn) -[:PART_OF]-> (in),
+ (kl) -[:PART_OF]-> (in)
+
+RETURN *;
+
+The expected output is shown in the picture i.e screenshot(neo_graph.png)
+
+
+1.What is the relationship between priya and guru?
+
+MATCH (x)-[r]-(y) WHERE y.name="priya" AND x.name="guru"
+
+CREATE (p:Person{ name:"priya",title:"Associate Professor"}),
+       (g:Person{name:"guru",title:"Associate Professor"})
+
+CREATE (ws:Subject{name:"Web Service"}),
+       (cc:Subject{name:"Cloud Computing"})
+
+CREATE (tn:State{ name:"Tamil Nadu",Capital:"Chennai"}),
+       (kl:State{name:"Kerala",Capital:"Thiruvanathapuram"})
+
+CREATE (saas:Service{ name:"SaaS"}),
+       (iaas:Service{ name:"IaaS"}),
+       (paas:Service{ name:"PaaS"})
+       
+CREATE (vit:Institiute{ name:"VIT"}),
+       (vlr:Place{ name:"Vellore"}),
+       (in:Country{ name:"India"})
+
+
+CREATE (p) -[:MARRIED]-> (g)
+CREATE (g) -[:MARRIED]-> (p)
+CREATE (p) -[:WORKS_IN]-> (vit)
+CREATE (g) -[:WORKS_IN]-> (vit)
+CREATE (p) -[:TEACHES]-> (cc)
+CREATE (g) -[:TEACHES]-> (cc)
+CREATE (g) -[:TEACHES]-> (ws)
+CREATE (saas) -[:BELONGS_TO]-> (cc)
+CREATE (paas) -[:BELONGS_TO]-> (cc)
+CREATE (iaas) -[:BELONGS_TO]-> (cc)
+CREATE (vit) -[:LOCATED_IN]-> (vlr)
+CREATE (vlr) -[:DISTRIC_OF]-> (tn)
+CREATE (tn) -[:PART_OF]-> (in)
+CREATE (kl) -[:PART_OF]-> (in)
+
+RETURN DISTINCT type(r);
+
+2.Who married priya?
+
+MATCH (x)-[:MARRIED]-(y) WHERE y.name="guru"
+CREATE (p:Person{ name:"priya",title:"Associate Professor"}),
+       (g:Person{name:"guru",title:"Associate Professor"})
+
+CREATE (ws:Subject{name:"Web Service"}),
+       (cc:Subject{name:"Cloud Computing"})
+
+CREATE (tn:State{ name:"Tamil Nadu",Capital:"Chennai"}),
+       (kl:State{name:"Kerala",Capital:"Thiruvanathapuram"})
+
+CREATE (saas:Service{ name:"SaaS"}),
+       (iaas:Service{ name:"IaaS"}),
+       (paas:Service{ name:"PaaS"})
+       
+CREATE (vit:Institiute{ name:"VIT"}),
+       (vlr:Place{ name:"Vellore"}),
+       (in:Country{ name:"India"})
+
+
+CREATE (p) -[:MARRIED]-> (g)
+CREATE (g) -[:MARRIED]-> (p)
+CREATE (p) -[:WORKS_IN]-> (vit)
+CREATE (g) -[:WORKS_IN]-> (vit)
+CREATE (p) -[:TEACHES]-> (cc)
+CREATE (g) -[:TEACHES]-> (cc)
+CREATE (g) -[:TEACHES]-> (ws)
+CREATE (saas) -[:BELONGS_TO]-> (cc)
+CREATE (paas) -[:BELONGS_TO]-> (cc)
+CREATE (iaas) -[:BELONGS_TO]-> (cc)
+CREATE (vit) -[:LOCATED_IN]-> (vlr)
+CREATE (vlr) -[:DISTRIC_OF]-> (tn)
+CREATE (tn) -[:PART_OF]-> (in)
+CREATE (kl) -[:PART_OF]-> (in)
+
+RETURN x LIMIT 1;
+
+3:Who is the person that married guru and works in VIT?
+
+MATCH (x)-[:MARRIED]->(y) WHERE y.name="guru"
+MATCH (x)-[:WORKS_IN]-> (z) WHERE z.name="VIT"
+
+CREATE (p:Person{ name:"priya",title:"Associate Professor"}),
+       (g:Person{name:"guru",title:"Associate Professor"})
+
+CREATE (ws:Subject{name:"Web Service"}),
+       (cc:Subject{name:"Cloud Computing"})
+
+CREATE (tn:State{ name:"Tamil Nadu",Capital:"Chennai"}),
+       (kl:State{name:"Kerala",Capital:"Thiruvanathapuram"})
+
+CREATE (saas:Service{ name:"SaaS"}),
+       (iaas:Service{ name:"IaaS"}),
+       (paas:Service{ name:"PaaS"})
+       
+CREATE (vit:Institiute{ name:"VIT"}),
+       (vlr:Place{ name:"Vellore"}),
+       (in:Country{ name:"India"})
+
+
+CREATE (p) -[:MARRIED]-> (g)
+CREATE (g) -[:MARRIED]-> (p)
+CREATE (p) -[:WORKS_IN]-> (vit)
+CREATE (g) -[:WORKS_IN]-> (vit)
+CREATE (p) -[:TEACHES]-> (cc)
+CREATE (g) -[:TEACHES]-> (cc)
+CREATE (g) -[:TEACHES]-> (ws)
+CREATE (saas) -[:BELONGS_TO]-> (cc)
+CREATE (paas) -[:BELONGS_TO]-> (cc)
+CREATE (iaas) -[:BELONGS_TO]-> (cc)
+CREATE (vit) -[:LOCATED_IN]-> (vlr)
+CREATE (vlr) -[:DISTRIC_OF]-> (tn)
+CREATE (tn) -[:PART_OF]-> (in)
+CREATE (kl) -[:PART_OF]-> (in)
+
+RETURN x LIMIT 1;
+
+4.In which institute does guru work?
+
+MATCH (x:Person) -[:WORKS_IN]-> (z:Institiute) WHERE x.name="guru"
+
+CREATE (p:Person{ name:"priya",title:"Associate Professor"}),
+       (g:Person{name:"guru",title:"Associate Professor"})
+
+CREATE (ws:Subject{name:"Web Service"}),
+       (cc:Subject{name:"Cloud Computing"})
+
+CREATE (tn:State{ name:"Tamil Nadu",Capital:"Chennai"}),
+       (kl:State{name:"Kerala",Capital:"Thiruvanathapuram"})
+
+CREATE (saas:Service{ name:"SaaS"}),
+       (iaas:Service{ name:"IaaS"}),
+       (paas:Service{ name:"PaaS"})
+       
+CREATE (vit:Institiute{ name:"VIT"}),
+       (vlr:Place{ name:"Vellore"}),
+       (in:Country{ name:"India"})
+
+
+CREATE (p) -[:MARRIED]-> (g)
+CREATE (g) -[:MARRIED]-> (p)
+CREATE (p) -[:WORKS_IN]-> (vit)
+CREATE (g) -[:WORKS_IN]-> (vit)
+CREATE (p) -[:TEACHES]-> (cc)
+CREATE (g) -[:TEACHES]-> (cc)
+CREATE (g) -[:TEACHES]-> (ws)
+CREATE (saas) -[:BELONGS_TO]-> (cc)
+CREATE (paas) -[:BELONGS_TO]-> (cc)
+CREATE (iaas) -[:BELONGS_TO]-> (cc)
+CREATE (vit) -[:LOCATED_IN]-> (vlr)
+CREATE (vlr) -[:DISTRIC_OF]-> (tn)
+CREATE (tn) -[:PART_OF]-> (in)
+CREATE (kl) -[:PART_OF]-> (in)
+
+RETURN z LIMIT 1;
+
+5. What are the service models in cloud computing?
+
+MATCH (x:Service) -[:BELONGS_TO]-> (z:Subject) WHERE z.name="Cloud Computing"
+
+CREATE (p:Person{ name:"priya",title:"Associate Professor"}),
+       (g:Person{name:"guru",title:"Associate Professor"})
+
+CREATE (ws:Subject{name:"Web Service"}),
+       (cc:Subject{name:"Cloud Computing"})
+
+CREATE (tn:State{ name:"Tamil Nadu",Capital:"Chennai"}),
+       (kl:State{name:"Kerala",Capital:"Thiruvanathapuram"})
+
+CREATE (saas:Service{ name:"SaaS"}),
+       (iaas:Service{ name:"IaaS"}),
+       (paas:Service{ name:"PaaS"})
+       
+CREATE (vit:Institiute{ name:"VIT"}),
+       (vlr:Place{ name:"Vellore"}),
+       (in:Country{ name:"India"})
+
+
+CREATE (p) -[:MARRIED]-> (g)
+CREATE (g) -[:MARRIED]-> (p)
+CREATE (p) -[:WORKS_IN]-> (vit)
+CREATE (g) -[:WORKS_IN]-> (vit)
+CREATE (p) -[:TEACHES]-> (cc)
+CREATE (g) -[:TEACHES]-> (cc)
+CREATE (g) -[:TEACHES]-> (ws)
+CREATE (saas) -[:BELONGS_TO]-> (cc)
+CREATE (paas) -[:BELONGS_TO]-> (cc)
+CREATE (iaas) -[:BELONGS_TO]-> (cc)
+CREATE (vit) -[:LOCATED_IN]-> (vlr)
+CREATE (vlr) -[:DISTRIC_OF]-> (tn)
+CREATE (tn) -[:PART_OF]-> (in)
+CREATE (kl) -[:PART_OF]-> (in)
+
+RETURN x,z LIMIT 3;
+
+5.Which is the state in India other than Tamil Nadu?
+
+MATCH (x:State) -[:PART_OF]-> (z:Country) WHERE z.name="India"
+MATCH (x:State) WHERE NOT (x.name="Tamil Nadu")
+
+CREATE (p:Person{ name:"priya",title:"Associate Professor"}),
+       (g:Person{name:"guru",title:"Associate Professor"})
+
+CREATE (ws:Subject{name:"Web Service"}),
+       (cc:Subject{name:"Cloud Computing"})
+
+CREATE (tn:State{ name:"Tamil Nadu",Capital:"Chennai"}),
+       (kl:State{name:"Kerala",Capital:"Thiruvanathapuram"})
+
+CREATE (saas:Service{ name:"SaaS"}),
+       (iaas:Service{ name:"IaaS"}),
+       (paas:Service{ name:"PaaS"})
+       
+CREATE (vit:Institiute{ name:"VIT"}),
+       (vlr:Place{ name:"Vellore"}),
+       (in:Country{ name:"India"})
+
+
+CREATE (p) -[:MARRIED]-> (g)
+CREATE (g) -[:MARRIED]-> (p)
+CREATE (p) -[:WORKS_IN]-> (vit)
+CREATE (g) -[:WORKS_IN]-> (vit)
+CREATE (p) -[:TEACHES]-> (cc)
+CREATE (g) -[:TEACHES]-> (cc)
+CREATE (g) -[:TEACHES]-> (ws)
+CREATE (saas) -[:BELONGS_TO]-> (cc)
+CREATE (paas) -[:BELONGS_TO]-> (cc)
+CREATE (iaas) -[:BELONGS_TO]-> (cc)
+CREATE (vit) -[:LOCATED_IN]-> (vlr)
+CREATE (vlr) -[:DISTRIC_OF]-> (tn)
+CREATE (tn) -[:PART_OF]-> (in)
+CREATE (kl) -[:PART_OF]-> (in)
+
+RETURN x,z LIMIT 1;
+
+6.Where is VIT located
+
+MATCH (x) -[:LOCATED_IN]-> (z) WHERE x.name="VIT"
+
+CREATE (p:Person{ name:"priya",title:"Associate Professor"}),
+       (g:Person{name:"guru",title:"Associate Professor"})
+
+CREATE (ws:Subject{name:"Web Service"}),
+       (cc:Subject{name:"Cloud Computing"})
+
+CREATE (tn:State{ name:"Tamil Nadu",Capital:"Chennai"}),
+       (kl:State{name:"Kerala",Capital:"Thiruvanathapuram"})
+
+CREATE (saas:Service{ name:"SaaS"}),
+       (iaas:Service{ name:"IaaS"}),
+       (paas:Service{ name:"PaaS"})
+       
+CREATE (vit:Institiute{ name:"VIT"}),
+       (vlr:Place{ name:"Vellore"}),
+       (in:Country{ name:"India"})
+
+
+CREATE (p) -[:MARRIED]-> (g)
+CREATE (g) -[:MARRIED]-> (p)
+CREATE (p) -[:WORKS_IN]-> (vit)
+CREATE (g) -[:WORKS_IN]-> (vit)
+CREATE (p) -[:TEACHES]-> (cc)
+CREATE (g) -[:TEACHES]-> (cc)
+CREATE (g) -[:TEACHES]-> (ws)
+CREATE (saas) -[:BELONGS_TO]-> (cc)
+CREATE (paas) -[:BELONGS_TO]-> (cc)
+CREATE (iaas) -[:BELONGS_TO]-> (cc)
+CREATE (vit) -[:LOCATED_IN]-> (vlr)
+CREATE (vlr) -[:DISTRICT_OF]-> (tn)
+CREATE (tn) -[:PART_OF]-> (in)
+CREATE (kl) -[:PART_OF]-> (in)
+
+RETURN z LIMIT 1;
+
+7.What is the name of the associate professor who teaches Cloud Computing since '22/3/2016'?
+
+MATCH (x:Person) WHERE x.title="Associate Professor"
+MATCH (x:Person) -[r:TEACHES]-> (z:Subject) WHERE r.since='22/3/2016'
+MATCH (z:Subject) WHERE z.name="Cloud Computing"
+
+
+CREATE (p:Person{ name:"priya",title:"Assistant Professor"}),
+       (g:Person{name:"guru",title:"Associate Professor"})
+
+CREATE (ws:Subject{name:"Web Service"}),
+       (cc:Subject{name:"Cloud Computing"})
+
+CREATE (tn:State{ name:"Tamil Nadu",Capital:"Chennai"}),
+       (kl:State{name:"Kerala",Capital:"Thiruvanathapuram"})
+
+CREATE (saas:Service{ name:"SaaS"}),
+       (iaas:Service{ name:"IaaS"}),
+       (paas:Service{ name:"PaaS"})
+       
+CREATE (vit:Institiute{ name:"VIT"}),
+       (vlr:Place{ name:"Vellore"}),
+       (in:Country{ name:"India"})
+
+
+CREATE (p) -[:MARRIED]-> (g)
+CREATE (g) -[:MARRIED]-> (p)
+CREATE (p) -[:WORKS_IN]-> (vit)
+CREATE (g) -[:WORKS_IN]-> (vit)
+CREATE (p) -[ra:TEACHES {since:"12/12/2014",class:"B.tech"}]-> (cc)
+CREATE (g) -[pa:TEACHES {since:"22/3/2016",class:"M.Tech"}]-> (cc)
+CREATE (g) -[sa:TEACHES {since:"7/7/2015",class:"M.Tech"}]-> (ws)
+CREATE (saas) -[:BELONGS_TO]-> (cc)
+CREATE (paas) -[:BELONGS_TO]-> (cc)
+CREATE (iaas) -[:BELONGS_TO]-> (cc)
+CREATE (vit) -[:LOCATED_IN]-> (vlr)
+CREATE (vlr) -[:DISTRICT_OF]-> (tn)
+CREATE (tn) -[:PART_OF]-> (in)
+CREATE (kl) -[:PART_OF]-> (in)
+
+RETURN x LIMIT 1;
