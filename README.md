@@ -24,7 +24,7 @@ Extract it into system.
 
 Install it by running 'bin\neo4j install-service' using command prompt(cmd with admin rights!!) from root directory
 
-Run neo4j server using 'bin\neo4j start'(or just neo4jstart form respective directory..)
+Run neo4j server using 'bin\neo4j start'(or just neo4j start form respective directory..)
 
 Start neo4j browser 'http://localhost:7474/'
 
